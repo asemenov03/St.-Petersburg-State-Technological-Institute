@@ -55,7 +55,7 @@ def bez_numpy(m):
     m1_new = trans_m(m1_new)
     for i in range(len(m1_new)):
         for j in range(len(m1_new)):
-            m1_new[i][j] = 1 / det * m1_new[i][j]
+            m1_new[i][j] = round(1 / det * m1_new[i][j])
     print('Результат:')
     for i in range(len(m1_new)):
         print(*m1_new[i])
@@ -66,6 +66,9 @@ def s_numpy(m):
     start = time.perf_counter()
     m = np.array(m)
     m = np.linalg.inv(m)
+    for i in range(len(m)):
+        for j in range(len(m)):
+            m[i][j] = round(m[i][j],2)
     print('Результат:')
     for i in range(len(m)):
         print(*m[i])
