@@ -47,8 +47,8 @@ visa_price1, mcard_price1 = dell(visa_price,mcard_price)
 
 def vinzon(visa_price1,mcard_price1): #восстановление с помощью винзорирования
     print('Список после удаление случайных элементов')
-    print(visa_price1)
-    print(mcard_price1)
+    print(f'Visa: {visa_price1}')
+    print(f'Mastercard: {mcard_price1}')
     if visa_price1[0] == 0:
         visa_price1[0] = visa_price1[1]
     if visa_price1[len(visa_price1)-1] == 0:
@@ -63,9 +63,35 @@ def vinzon(visa_price1,mcard_price1): #восстановление с помо�
         if mcard_price1[i] == 0:
             mcard_price1[i] = mcard_price1[i-1]
     print('Метод винзорирования')
-    print(visa_price1)
-    print(mcard_price1)
+    print(f'Visa: {visa_price1}')
+    print(f'Mastercard: {mcard_price1}')
+
+def lin(visa_price1, mcard_price1):
+    count = 2
+    if visa_price1[0] == 0:
+        visa_price1[0] = visa_price1[1]
+    if visa_price1[len(visa_price1)-1] == 0:
+        visa_price1[len(visa_price1)-1] = visa_price1[len(visa_price1)-2]
+    if mcard_price1[0] == 0:
+        mcard_price1[0] = mcard_price1[1]
+    if mcard_price1[len(mcard_price1)-1] == 0:
+        mcard_price1[len(mcard_price1)-1] = mcard_price1[len(mcard_price1)-2]
+    for i in range(1,len(visa_price1)-1):
+        if visa_price1[i] == 0:
+            if visa_price1[i-1] != 0 and visa_price1[i+1] != 0:
+                visa_price1[i] = (visa_price1[i-1]+visa_price1[i+1])/count
+                print(count)
+            else:
+                for j in range(i+1,len(visa_price1)):
+                    if j != 0:
+                        visa_price1[i] = round((visa_price1[i-1]+visa_price1[i+1])/count,2)
+                        break
+                    else:
+                        count += 1
+    print('Метод линейной аппроксимации')
+    print(f'Visa: {visa_price1}')
 
 
 pirson(visa_price, mcard_price)
-vinzon(visa_price1,mcard_price1)
+vinzon(visa_price1, mcard_price1)
+lin(visa_price1, mcard_price1)
